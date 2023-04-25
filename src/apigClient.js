@@ -36,7 +36,7 @@ apigClientFactory.newClient = (config = {}) => {
     region: '',
     apiKey: '',
     invokeUrl: '',
-    service: 'execute-api',
+    service: '',
     defaultContentType: 'application/json',
     defaultAcceptType: 'application/json',
     systemClockOffset: 0,
@@ -48,6 +48,11 @@ apigClientFactory.newClient = (config = {}) => {
   const invokeUrl = config.invokeUrl;
   if (!invokeUrl) {
     throw new Error("invokeUrl must be specified!");
+  }
+
+  const service = config.service;
+  if (!service) {
+    config.service = 'execute-api';
   }
 
   const endpoint = /(^https?:\/\/[^/]+)/g.exec(invokeUrl)[1];
